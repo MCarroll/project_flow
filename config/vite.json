@@ -1,9 +1,7 @@
 {
   "all": {
     "sourceCodeDir": "app/frontend",
-    "watchAdditionalPaths": [
-      "app/components/**/*.rb"
-    ]
+    "watchAdditionalPaths": []
   },
   "development": {
     "autoBuild": true,

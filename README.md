@@ -23,15 +23,16 @@ gem 'Plex'
 `Bundle Install`
 
 ## Directory Structure
+```bash
 app
-|--components #Phlex Components
-  |--header.rb
-  |--footer.rb
 |--views
   |--home
-      |--index.html.erb
+     |--header.rb
+     |--footer.rb
+     |--index.html.erb
+```
 
-## For Hot Module Reload
+## Hot Module Reload
 ```ruby
 import { defineConfig } from 'vite'
 import RubyPlugin from 'vite-plugin-ruby'
@@ -40,35 +41,40 @@ import FullReload from 'vite-plugin-full-reload'
 export default defineConfig({
   plugins: [
     RubyPlugin(),
-    FullReload(['config/routes.rb', 'app/views/**/*', 'app/components/**/*'], { delay: 200 })
+    FullReload(['config/routes.rb', 'app/views/**/*'], { delay: 200 })
   ],
 })
 ```
 
-## Phlex Components
 ```ruby
-class Heading < Phlex::Component
-  def template
-    h2 "Fun Times"
+# app/views/home/header.html.erb
+module Views
+  class Heading < Phlex::Component
+    def template
+      h1 "My Phex Header"
+      p "Render ruby generated view components"
+    end
   end
 end
 ```
 
-## app/views/home/index.html.erb
-```html
-# Call the Phlex heading component
-<%= render Heading.new %>
-# Standard html
-<h1>Project Flow Demo</h1>
-# Call the Plex footer component
-<%= render Footer.new %>
+```ruby
+Module Views
+  class Footer < Phlex::Component
+    def template
+      h3 "Fun 2x Times"
+    end
+  end
+end
 ```
 
-
-
-
-
-
-Plhex Version:
-phlex (0.2.2)
+```html
+<div class="container">
+  <%= render Views::Home::Heading.new %>
+  <div>Standard html</div>
+  <h1>Project Flow Demo</h1>
+  <p>To test out Phlex Components</p>
+  <%= render Views::Home::Footer.new %>
+</div>
+```
 
